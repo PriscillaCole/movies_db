@@ -1,0 +1,3 @@
+const createMovies = 'CREATE TABLE "movies" ("id" integer NOT NULL,"background_path" character varying(255) NOT NULL "original_language" character varying(255) NOT NULL,"original_title" character varying(255) NOT NULL,"overview" text NOT NULL,"poster_path" character varying(255) NOT NULL,"release_date" date NOT NULL,"vote_average" integer NOT NULL,"vote_count" integer NOT NULL,"runtime" integer NOT NULL,"tagline" character varying(255) NOT NULL,"actors" jsonb NULL,"genres" jsonb NULL);'
+
+const getMovies = 'SELECT * FROM "movies";'

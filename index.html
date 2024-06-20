@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <!-- <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script> -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="index.js"></script>
+</head>
+<body>
+    
+
+<i title="Go to top" onclick="topFunction()" id="myBtn" class="fas fa-arrow-up" aria-hidden="true"></i>
+<div class="container">
+  <div class="sidebar">
+    <div class="sidebar-container">
+      <a class="logo-link" href="#" onclick="sortMovies('popularity')">
+        <img src="logo.jpg" class="logo-image">
+      </a>
+      <h2 class="title-genre">Discover</h2>
+      <a class="category-link current" href="#" onclick="sortMovies('popularity')">
+        <div class="genre">Popular</div>
+      </a>
+      <a class="category-link" href="#" onclick="sortMovies('rating')">
+        <div class="genre">Top Rated</div>
+      </a>
+      <h2 class="title-genre">Genres</h2>
+      <a class="category-link" href="#" onclick="sortMovies('animation')">
+        <div class="genre">Animation</div>
+      </a>
+      <a class="category-link" href="#" onclick="sortMovies('comedy')">
+        <div class="genre">Comedy</div>
+      </a>
+      <a class="category-link" href="#" onclick="sortMovies('crime')">
+        <div class="genre">Crime</div>
+      </a>
+      <a class="category-link" href="#" onclick="sortMovies('horror')">
+        <div class="genre">Horror</div>
+      </a>
+   
+
+    </div>
+  </div>
+  <div class="search">
+    <form class="search-form">
+        <button type="submit" class="search-button">
+    
+        </button>
+        <input id="search" onKeyPress="return checkSubmit(event)" type="search" placeholder="&nbsp;Search for a movie..." class="search-input" value="">
+    </form>
+    
+  </div>
+  <div class="content">
+    <div class="inner-container">
+      <div class="titles">
+        <h1>Popular</h1>
+        <h2>movies</h2>
+        <i class="fa fa-search" aria-hidden="true"></i>
+      </div>
+      <div class="item-container">
+      </div>
+      <div class="load-more"><i class="fa fa-plus-circle more" aria-hidden="true"></i></div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
