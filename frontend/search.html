@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <!-- <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script> -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="index.js"></script>
+</head>
+<body>
+    
+
+<i title="Go to top" onclick="topFunction()" id="myBtn" class="fas fa-arrow-up" aria-hidden="true"></i>
+<div class="container">
+  <div class="search">
+    <form class="search-form">
+      <input id="search" onKeyPress="return checkSubmit(event)" type="search" placeholder="&nbsp;Search for a movie..." class="search-input" value="">
+    </form>
+  </div>
+  
+ 
+  <div class="content">
+    <div class="inner-container">
+      <div class="item-container">
+      </div>
+      <div class="load-more"><i class="fa fa-plus-circle more" aria-hidden="true"></i></div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
