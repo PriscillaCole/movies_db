@@ -3,6 +3,8 @@ const cors = require('cors');
 
 const bodyParser = require('body-parser');
 const movieRouter = require('./routes');
+const dotenv = require('dotenv');
+dotenv.config();
 
 const app = express();
 const port = 3000;
