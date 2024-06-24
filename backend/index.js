@@ -9,13 +9,16 @@ dotenv.config();
 const app = express();
 const port = 3000;
 
-// Serve static files from the "frontend" directory
-app.use(express.static(path.join(__dirname, '../frontend')));
+// Enable CORS for all routes
+app.use(cors());
+app.options('*', cors());
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.options('*', cors());
-app.use(cors());
+
+// Serve static files from the "frontend" directory
+app.use(express.static(path.join(__dirname, '../frontend')));
+
 app.use('/movies', movieRouter);
 
 // Serve the index.html file for the root URL

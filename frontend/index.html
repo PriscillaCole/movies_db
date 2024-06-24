@@ -12,20 +12,12 @@
 <body>
     
 
-<i title="Go to top" onclick="topFunction()" id="myBtn" class="fas fa-arrow-up" aria-hidden="true"></i>
 <div class="container">
   <div class="sidebar">
     <div class="sidebar-container">
-      <a class="logo-link" href="#" onclick="sortMovies('popularity')">
+     
         <img src="logo.jpg" class="logo-image">
-      </a>
-      <h2 class="title-genre">Discover</h2>
-      <a class="category-link current" href="#" onclick="sortMovies('popularity')">
-        <div class="genre">Popular</div>
-      </a>
-      <a class="category-link" href="#" onclick="sortMovies('rating')">
-        <div class="genre">Top Rated</div>
-      </a>
+   
       <h2 class="title-genre">Genres</h2>
       <a class="category-link" href="#" onclick="sortMovies('animation')">
         <div class="genre">Animation</div>
@@ -44,18 +36,9 @@
     </div>
   </div>
   <div  class="add">
-    <button>
-      <a href="/frontend/search.html">Add Movie</a>
-    </button>
-  </div>
-  <div class="search">
-    <form class="search-form">
-        <button type="submit" class="search-button">
-    
-        </button>
-        <input id="search" onKeyPress="return checkSubmit(event)" type="search" placeholder="&nbsp;Search for a movie..." class="search-input" value="">
-    </form>
-    
+    <button class="add-button" onclick="window.location.href='/search.html'">
+      Add Movie
+  </button>
   </div>
   <div class="content">
     <div class="inner-container">

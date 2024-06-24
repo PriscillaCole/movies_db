@@ -5,15 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" type="text/css" href="index.css">
-    <!-- <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script> -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="index.js"></script>
 </head>
 <body>
     
 
-<i title="Go to top" onclick="topFunction()" id="myBtn" class="fas fa-arrow-up" aria-hidden="true"></i>
 <div class="container">
+  <div class="sidebar">
+    <div class="sidebar-container">
+     
+        <img src="logo.jpg" class="logo-image">
+      
+     
+      <h2 class="title-genre">Dashboard</h2>
+      <a class="category-link" href="index.html">
+        <div class="genre">Home</div>
+      </a>
+      <a class="category-link" href="javascript:history.back()">
+        <div class="genre">Back</div>
+      </a>
+      
+      
+   
+
+    </div>
+  </div>
   <div class="search">
     <form class="search-form">
       <input id="search" onKeyPress="return checkSubmit(event)" type="search" placeholder="&nbsp;Search for a movie..." class="search-input" value="">
