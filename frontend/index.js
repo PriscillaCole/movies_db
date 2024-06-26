@@ -108,7 +108,7 @@ function showMovie(choice) {
               // Skip if the overview is null
           } else {
               $(".item-container").append(
-                  "<div class='item link movies m" + i + "' id='" + id + "'><img src='" + poster +
+                  "<div class='item link movies m" + i + "' id='" + id + "' onclick='movieInfo(" + id + ")' ><img src='" + poster +
                   "' class='image'><div class='item-inner'><h2 class='item-title'>" + title +
                   "</h2><span class='rating'><i class='fa fa-star' aria-hidden='true'></i> " + rating +
                   "</span></div><button class='delete-button' onclick='deleteMovie(" + id + ")'>Delete</button></div>"
@@ -293,10 +293,6 @@ function deleteMovie(id) {
             showConfirmButton: true
           });
         },
-        complete: function(xhr, status) {
-          console.log("Request complete with status: " + status);
-          console.log("Response: ", xhr.responseText);
-        }
       });
     }
   });
@@ -315,7 +311,6 @@ function showActor(id) {
     for (var i = 0; i < data.results.length; i++) {
       var id = data.results[i].id;
       var title = data.results[i].title;
-      var overview = data.results[i].overview;
       var rating = data.results[i].vote_average;
       var poster = posterPaths + data.results[i].poster_path;
       if (poster === "https://image.tmdb.org/t/p/w370_and_h556_bestv2null") {
