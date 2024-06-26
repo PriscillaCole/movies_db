@@ -7,6 +7,10 @@ var key = "&api_key=6b4357c41d9c606e4d7ebe2f4a8850ea";
 var movieCast = "https://api.themoviedb.org/3/movie/";
 var actorInfo = "https://api.themoviedb.org/3/discover/movie?&with_cast=";
 
+$(document).ready(function() {
+    showMovie(); // Call showMovie when the document is ready
+});
+
 function sortMovies(choice) {
   next = 0;
   $(".movies").remove();
@@ -15,25 +19,19 @@ function sortMovies(choice) {
   $(".overview").hide();
   $(".search").show();
 
-  // Genres sort by list start
- if (choice === "animation") {
-    choices = "animation";
-    showMovie("animation");
-    $("h1").text("animation");
-  } else if (choice === "comedy") {
-    choices = "comedy";
-    showMovie("comedy");
-    $("h1").text("comedy");
-  } else if (choice === "crime") {
-    choices = "crime";
-    showMovie("crime");
-    $("h1").text("crime");
-  } else if (choice === "horror") {
-    choices = "horror";
-    showMovie("horror");
-    $("h1").text("horror");
+  // Update the header and call showMovie with the selected genre
+  if (choice === "Animation") {
+      $("h1").text("Animation");
+  } else if (choice === "Comedy") {
+      $("h1").text("Comedy");
+  } else if (choice === "Crime") {
+      $("h1").text("Crime");
+  } else if (choice === "Horror") {
+      $("h1").text("Horror");
   }
+  showMovie(choice);
 }
+
 
 //when enter is hit it starts the search
 function checkSubmit(e) {
@@ -49,9 +47,8 @@ function checkSubmit(e) {
 function search(search) {
   $(".movies").remove();
   $(".tv").remove();
-  var searchurl =
-    "https://api.themoviedb.org/3/search/multi?api_key=6b4357c41d9c606e4d7ebe2f4a8850ea&query=";
-  $.getJSON(searchurl + search, function (data) {
+  var searchurl = "https://api.themoviedb.org/3/search/multi?api_key=6b4357c41d9c606e4d7ebe2f4a8850ea&query=";
+  $.getJSON(searchurl + search, function(data) {
     console.log(data);
     for (var i = 0; i < data.results.length; i++) {
       var result = data.results[i];
@@ -60,27 +57,18 @@ function search(search) {
       var rating = result.vote_average;
       var poster = posterPaths + result.poster_path;
       var overview = result.overview;
-      
-      if (!id || !title || !rating || !result.poster_path || !overview || 
-          poster === "https://image.tmdb.org/t/p/w370_and_h556_bestv2null" || 
-          poster === "https://image.tmdb.org/t/p/w370_and_h556_bestv2undefined" || 
-          overview === "null") {
+
+      if (!id || !title || !rating || !result.poster_path || !overview ||
+        poster === "https://image.tmdb.org/t/p/w370_and_h556_bestv2null" ||
+        poster === "https://image.tmdb.org/t/p/w370_and_h556_bestv2undefined" ||
+        overview === "null") {
         continue;
       }
 
       $(".item-container").append(
-        "<a class='item link movies m" +
-        i +
-        "' id='" +
-        id +
-        "' onclick='movieInfo(" +
-        id +
-        ")' href='#'><img src='" +
-        poster +
-        "' class='image'><div class='item-inner'><h2 class='item-title'>" +
-        title +
-        "</h2><span class='rating'><i class='fa fa-star' aria-hidden='true'></i> " +
-        rating +
+        "<a class='item link movies m" + i + "' id='" + id + "' onclick='movieInfo(" + id + ")' href='#'><img src='" +
+        poster + "' class='image'><div class='item-inner'><h2 class='item-title'>" + title +
+        "</h2><span class='rating'><i class='fa fa-star' aria-hidden='true'></i> " + rating +
         "</span></div></a>"
       );
     }
@@ -90,52 +78,64 @@ function search(search) {
 //display the movies in the database
 function showMovie(choice) {
   next++;
-  $.getJSON(url, function (data) {
-    console.log(data);
-    for (var i = 0; i < data.length; i++) {
-      var id = data[i].id;
-      var title = data[i].original_title;
-      var overview = data[i].overview;
-      var rating = data[i].vote_average;
-      var poster = posterPaths + data[i].poster_path;
-      if (poster === "https://image.tmdb.org/t/p/w370_and_h556_bestv2null") {
-        //if their is no poster dont show the movie
-      } else if (
-        poster === "https://image.tmdb.org/t/p/w370_and_h556_bestv2undefined"
-      ) {
-        //dont show if the overview is null
-      } else if (overview == "null") {
-        //dont show if the overview is null
-      }else {
-  $(".item-container").append(
-    "<div class='item link movies m" +
-    i +
-    "' id='" +
-    id +
-    "'><img src='" +
-    poster +
-    "' class='image'><div class='item-inner'><h2 class='item-title'>" +
-    title +
-    "</h2><span class='rating'><i class='fa fa-star' aria-hidden='true'></i> " +
-    rating +
-    "</span></div><button class='delete-button' onclick='deleteMovie(" + id + ")'>Delete</button></div>"
-  );
-}
+  $.getJSON(url, function(data) {
+      console.log(data);
+      $(".item-container").empty(); // Clear the movie container
+      var moviesFound = false; // Flag to check if any movie matches the genre
 
-    }
+      for (var i = 0; i < data.length; i++) {
+          var id = data[i].id;
+          var title = data[i].original_title;
+          var overview = data[i].overview;
+          var rating = data[i].vote_average;
+          var poster = posterPaths + data[i].poster_path;
+          var genres = data[i].genres ? data[i].genres.split(', ') : []; // Split genres into an array
+
+          // Skip the movie if it doesn't match the selected genre
+          if (choice && !genres.includes(choice)) {
+              console.log("Genre doesn't match");
+              continue;
+          }
+
+          // If a movie matches the genre, set moviesFound to true
+          moviesFound = true;
+
+          if (poster === "https://image.tmdb.org/t/p/w370_and_h556_bestv2null") {
+              // Skip if there is no poster
+          } else if (poster === "https://image.tmdb.org/t/p/w370_and_h556_bestv2undefined") {
+              // Skip if the overview is undefined
+          } else if (overview == "null") {
+              // Skip if the overview is null
+          } else {
+              $(".item-container").append(
+                  "<div class='item link movies m" + i + "' id='" + id + "'><img src='" + poster +
+                  "' class='image'><div class='item-inner'><h2 class='item-title'>" + title +
+                  "</h2><span class='rating'><i class='fa fa-star' aria-hidden='true'></i> " + rating +
+                  "</span></div><button class='delete-button' onclick='deleteMovie(" + id + ")'>Delete</button></div>"
+              );
+          }
+      }
+
+      // Display the message if no movies are found
+      if (!moviesFound) {
+          $("#no-movies-message").show();
+      } else {
+          $("#no-movies-message").hide();
+      }
   });
 }
 
+
 //show the movie information
 function movieInfo(id) {
-  $.getJSON(movieCast + id + "/casts?" + key, function (json) {
-    let cast1 = json.cast[0]?.name ;
+  $.getJSON(movieCast + id + "/casts?" + key, function(json) {
+    let cast1 = json.cast[0]?.name;
     let cast1id = json.cast[0]?.id;
     let cast2 = json.cast[1]?.name;
     let cast2id = json.cast[1]?.id;
     let cast3 = json.cast[2]?.name;
-    let cast3id = json.cast[2]?.id ;
-    let cast4 = json.cast[3]?.name ;
+    let cast3id = json.cast[2]?.id;
+    let cast4 = json.cast[3]?.name;
     let cast4id = json.cast[3]?.id;
 
     $(".movies").hide();
@@ -144,25 +144,22 @@ function movieInfo(id) {
     $(".item-container").addClass("single");
     $(".titles").addClass("hide");
 
-    var infoURL =
-      "https://api.themoviedb.org/3/movie/" +
-      id +
-      "?&api_key=6b4357c41d9c606e4d7ebe2f4a8850ea";
+    var infoURL = "https://api.themoviedb.org/3/movie/" + id + "?&api_key=6b4357c41d9c606e4d7ebe2f4a8850ea";
 
-    $.getJSON(infoURL, function (data) {
-      let runtime = data.runtime ? data.runtime :"Runtime not available";
-      let tagline = data.tagline ? data.tagline :"";
+    $.getJSON(infoURL, function(data) {
+      let runtime = data.runtime ? data.runtime : "Runtime not available";
+      let tagline = data.tagline ? data.tagline : "";
       let year = data.release_date ? data.release_date.slice(0, 4) : "Year not available";
       let title = data.title ? data.title : "Title not available";
       let rating = data.vote_average ? data.vote_average : "Rating not available";
-      let overview = data.overview ? data.overview: "Overview not available";
+      let overview = data.overview ? data.overview : "Overview not available";
       let poster = data.poster_path ? posterPaths + data.poster_path : "https://via.placeholder.com/1280x1080?text=No+Poster&000.jpg";
 
       let genre;
       if (data.genres && data.genres.length > 0) {
         genre = data.genres.map(g => g.name).join(", ");
       } else {
-        genre = "Genres not available";
+        genre = "Genre not available";
       }
 
       let actors = [
@@ -224,6 +221,7 @@ function movieInfo(id) {
           genres: genre
         }) + ")'>Add Movie to DB</button></div></div></div></div></div>"
       );
+
     });
   });
 }
@@ -244,7 +242,8 @@ function addMovieToDB(movieDetails) {
   });
 }
 
-//delete movies from the database
+
+// Delete a movie from the database
 function deleteMovie(id) {
   $.ajax({
     url: "http://localhost:3000/movies/delete/" + id,
@@ -262,6 +261,7 @@ function deleteMovie(id) {
     }
   });
 }
+
 
 //show the movies the actors have been in
 function showActor(id) {
@@ -304,4 +304,5 @@ function showActor(id) {
 sortMovies();
 $(".container").addClass("main");
 $(".search").show();
+
 

@@ -10,48 +10,45 @@
     <script src="index.js"></script>
 </head>
 <body>
-    
+    <div class="container">
+        <div class="sidebar">
+            <div class="sidebar-container">
+                <img src="logo.jpg" class="logo-image">
+                <h2 class="title-genre">Genres</h2>
+                <a class="category-link" href="#" onclick="sortMovies('Animation')">
+                    <div class="genre">Animation</div>
+                </a>
+                <a class="category-link" href="#" onclick="sortMovies('Comedy')">
+                    <div class="genre">Comedy</div>
+                </a>
+                <a class="category-link" href="#" onclick="sortMovies('Crime')">
+                    <div class="genre">Crime</div>
+                </a>
+                <a class="category-link" href="#" onclick="sortMovies('Horror')">
+                    <div class="genre">Horror</div>
+                </a>
+            </div>
+        </div>
+        <div class="add">
+            <button class="add-button" onclick="window.location.href='/search.html'">Add Movie</button>
+        </div>
+        <div class="content">
+            <div class="inner-container">
+                <div class="titles">
+                    <h1>Priscilla's</h1>
+                    <h2>Movies</h2>
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                </div>
+                <div class="item-container">
+                </div>
+                <div class="item-container"></div>
+                  <div id="no-movies-message" style="display:none; text-align:center; margin-top:20px;">
+                      <h2>No movies uploaded yet for this genre.</h2>
+                  </div>
 
-<div class="container">
-  <div class="sidebar">
-    <div class="sidebar-container">
-     
-        <img src="logo.jpg" class="logo-image">
-   
-      <h2 class="title-genre">Genres</h2>
-      <a class="category-link" href="#" onclick="sortMovies('animation')">
-        <div class="genre">Animation</div>
-      </a>
-      <a class="category-link" href="#" onclick="sortMovies('comedy')">
-        <div class="genre">Comedy</div>
-      </a>
-      <a class="category-link" href="#" onclick="sortMovies('crime')">
-        <div class="genre">Crime</div>
-      </a>
-      <a class="category-link" href="#" onclick="sortMovies('horror')">
-        <div class="genre">Horror</div>
-      </a>
-   
-
+                <div class="load-more"><i class="fa fa-plus-circle more" aria-hidden="true"></i></div>
+            </div>
+        </div>
     </div>
-  </div>
-  <div  class="add">
-    <button class="add-button" onclick="window.location.href='/search.html'">
-      Add Movie
-  </button>
-  </div>
-  <div class="content">
-    <div class="inner-container">
-      <div class="titles">
-        <h1>Popular</h1>
-        <h2>movies</h2>
-        <i class="fa fa-search" aria-hidden="true"></i>
-      </div>
-      <div class="item-container">
-      </div>
-      <div class="load-more"><i class="fa fa-plus-circle more" aria-hidden="true"></i></div>
-    </div>
-  </div>
-</div>
 </body>
 </html>
