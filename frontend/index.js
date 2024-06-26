@@ -233,11 +233,29 @@ function addMovieToDB(movieDetails) {
     type: "POST",
     contentType: "application/json",
     data: JSON.stringify(movieDetails), 
-    success: function (data) {
-      alert("Movie added to DB");
+    success: function(data) {
+      Swal.fire({
+        icon: 'success',
+        title: 'Movie Added!',
+        text: 'The movie has been successfully added to the database.',
+        showConfirmButton: true
+      }).then((result) => {
+        if (result.isConfirmed) {
+          window.location.href = '/search.html';
+        }
+      });
     },
-    error: function (error) {
-      alert("Error adding movie to DB: " + error.responseJSON?.error || "Unknown error");
+    error: function(error) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Error adding movie to DB: ' + (error.responseJSON?.error || 'Unknown error'),
+        showConfirmButton: true
+      }). then((result) => {
+        if (result.isConfirmed) {
+          window.location.href = '/search.html';
+        }
+      });
     }
   });
 }
@@ -245,19 +263,41 @@ function addMovieToDB(movieDetails) {
 
 // Delete a movie from the database
 function deleteMovie(id) {
-  $.ajax({
-    url: "http://localhost:3000/movies/delete/" + id,
-    type: "DELETE",
-    success: function (data) {
-      alert("Movie deleted from DB");
-      $(".item-container").find(".item#" + id).remove();
-    },
-    error: function (error) {
-      alert("Error deleting movie from DB: " + (error.responseJSON?.error || "Unknown error"));
-    },
-    complete: function (xhr, status) {
-      console.log("Request complete with status: " + status);
-      console.log("Response: ", xhr.responseText);
+  Swal.fire({
+    title: 'Are you sure?',
+    text: "You won't be able to revert this!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, delete it!'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      $.ajax({
+        url: "http://localhost:3000/movies/delete/" + id,
+        type: "DELETE",
+        success: function(data) {
+          Swal.fire({
+            icon: 'success',
+            title: 'Deleted!',
+            text: 'The movie has been deleted from the database.',
+            showConfirmButton: true
+          });
+          $(".item-container").find(".item#" + id).remove();
+        },
+        error: function(error) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Error deleting movie from DB: ' + (error.responseJSON?.error || 'Unknown error'),
+            showConfirmButton: true
+          });
+        },
+        complete: function(xhr, status) {
+          console.log("Request complete with status: " + status);
+          console.log("Response: ", xhr.responseText);
+        }
+      });
     }
   });
 }
