@@ -249,7 +249,7 @@ function addMovieToDB(movieDetails) {
       Swal.fire({
         icon: 'error',
         title: 'Error',
-        text: 'Error adding movie to DB: ' + (error.responseJSON?.error || 'Unknown error'),
+        text: 'Error adding movie to DB: missing movie details',
         showConfirmButton: true
       }). then((result) => {
         if (result.isConfirmed) {
@@ -334,6 +334,12 @@ function showActor(id) {
     }
   });
 }
+
+$(document).ready(function() {
+  $('#hamburger-menu').click(function() {
+      $('.sidebar').toggleClass('active');
+  });
+});
 
 
 sortMovies();

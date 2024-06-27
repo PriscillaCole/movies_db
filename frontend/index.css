@@ -655,12 +655,46 @@
   #myBtn:hover {
     background-color: #000;
   }
+
+  .hamburger-menu {
+    display: none;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 24px;
+    cursor: pointer;
+}
   
   @media only screen and (max-width: 80em) {
     .sidebar {
       display: none;
+      width: 250px;
+      height: 100%;
+      background-color: #333;
+      z-index: 1000;
+      left: 0;
+      top: 0;
     }
+
+    .sidebar-container {
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
   }
+  .hamburger-menu {
+      display: block;
+  }
+  .container {
+      padding-top: 50px; /* To prevent content overlap */
+
+  }
+}
+
+/* Sidebar visible when active */
+.sidebar.active {
+  display: block;
+  }
+
   
   @media only screen and (max-width: 80em) {
     .main {
