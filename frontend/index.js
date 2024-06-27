@@ -204,7 +204,7 @@ function movieInfo(id) {
         cast4 +
         "</a></div><div id='hideMInfo' class='exit' style='font-size:30px;'><i style='cursor:pointer;' onclick='exit(" +
         id +
-        ")' class='fa fa-chevron-circle-left' aria-hidden='true'></i></div>" +
+        ")' aria-hidden='true'></i></div>" +
         "<button class='add-button' onclick='addMovieToDB(" + JSON.stringify({
           id: id,
           background_path: data.backdrop_path,
