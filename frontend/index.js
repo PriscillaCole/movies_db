@@ -107,13 +107,14 @@ function showMovie(choice) {
           } else if (overview == "null") {
               // Skip if the overview is null
           } else {
-              $(".item-container").append(
-                  "<div class='item link movies m" + i + "' id='" + id + "' onclick='movieInfo(" + id + ")' ><img src='" + poster +
-                  "' class='image'><div class='item-inner'><h2 class='item-title'>" + title +
-                  "</h2><span class='rating'><i class='fa fa-star' aria-hidden='true'></i> " + rating +
-                  "</span></div><button class='delete-button' onclick='deleteMovie(" + id + ")'>Delete</button></div>"
-              );
-          }
+            $(".item-container").append(
+                "<div class='item link movies m" + i + "' id='" + id + "' onclick='movieInfo(" + id + ")' ><img src='" + poster +
+                "' class='image'><div class='item-inner'><h2 class='item-title'>" + title +
+                "</h2><span class='rating'><i class='fa fa-star' aria-hidden='true'></i> " + rating +
+                "</span></div><button class='delete-button' onclick='deleteMovie(" + id + ")'><i class='fa fa-trash' aria-hidden='true'></i></button></div>"
+            );
+        }
+        
       }
 
       // Display the message if no movies are found
@@ -249,7 +250,7 @@ function addMovieToDB(movieDetails) {
       Swal.fire({
         icon: 'error',
         title: 'Error',
-        text: 'Error adding movie to DB: missing movie details',
+        text: 'Error adding movie to DB: ' + (error.responseJSON?.error || 'Unknown error'),
         showConfirmButton: true
       }). then((result) => {
         if (result.isConfirmed) {
